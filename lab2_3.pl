@@ -2,9 +2,9 @@
 % w starym rekurencyjnym stylu. 
 factorial(Number, Result) :- Number = 0, Result is 1.
 factorial(Number, Result) :- Number > 0, 
-    						 NumberD is Number - 1, 
-    						 factorial(NumberD, Previous),
-    						 Result is Number*Previous.
+                             NumberD is Number - 1, 
+                             factorial(NumberD, Previous),
+                             Result is Number*Previous.
 
 % Prymitywne unit testy,
 % zapytanie 'test' powinno przetestować silnię

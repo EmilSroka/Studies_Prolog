@@ -86,8 +86,8 @@ na_lewo(s1,s3).
 % Podpowiedź: należy znaleźć miejsca na stole,
 % na których leżą k1 i k2.
 na_lewo(K1, K2) :- stol(P1), stol(P2),
-    			   nad(K1, P1), nad(K2, P2), 
-    			   na_lewo(P1, P2).
+                   nad(K1, P1), nad(K2, P2), 
+                   na_lewo(P1, P2).
 
 %%%%%%%%%%%%%%%%%%%%%
 % na_prawo/2

@@ -1,4 +1,5 @@
-:- assert(juz_byli(_,_) :- fail).
+% :- assert(juz_byli(_,_) :- fail).
+:- dynamic juz_byli/2.
 
 jest_przodkiem(X,Y) :- jest_rodzicem(X,Y).
 jest_przodkiem(X,Y) :- jest_rodzicem(Z,Y),
@@ -20,4 +21,5 @@ jest_krewnym(X,Y) :- jest_przodkiem(Z,X),
                      X \= Y,
                      \+ ( juz_byli(X,Y) ; juz_byli(Y,X) ),
                      assert(juz_byli(X,Y)).
+                    
 jest_krewnym(_,_) :- retractall( juz_byli(_,_) ).
