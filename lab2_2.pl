@@ -39,7 +39,8 @@ process_command(add) :- read(New), assert(jest_znajomym(New)).
 process_command(del) :- read(Del), retract(jest_znajomym(Del)).
 
 process_command(list) :- writeln("Lista znajomych: "), jest_znajomym(Friend),  writeln(Friend), fail.
-process_command(list) :- true.
-
+process_command(list).
 
 process_command(exit) :- fail.
+
+process_command(X) :- X \= exit,  writeln("Nieznana komenda").

@@ -1,9 +1,9 @@
 % MISJA: zaimplementuj silnię
 % w starym rekurencyjnym stylu. 
-factorial(Number, Result) :- Number = 0, Result is 1.
+factorial(0,1).
 factorial(Number, Result) :- Number > 0, 
-                             NumberD is Number - 1, 
-                             factorial(NumberD, Previous),
+                             Predecessor is Number - 1, 
+                             factorial(Predecessor, Previous),
                              Result is Number*Previous.
 
 % Prymitywne unit testy,
