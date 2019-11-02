@@ -18,22 +18,24 @@ wiekszy([_,S-E], [Autor,Poprzedni], [Autor,Poprzedni]) :-
 
 % zapytania
 
+% listę autorów książek, bez duplikatów
 autorzy_bez_duplikatow(Wynik) :- 
     setof(Autor, (A,B,C)^ksiazka(A, B, Autor, C), Wynik).
-
+% listę tytułów książek, które zostały wydane po śmierci swojego autora
 ksiazki_wydane_po_smierci_autora(Wynik) :- 
     findall(Tytul, (
         ksiazka(_, Tytul, autor(_, _-RokSmierci), wydanie(_,RokWydania)),  
         RokWydania > RokSmierci
     ), Wynik).
-
+% listę par o postaci <imię autora> - <lista napisanych przez niego książek>.
 ksiazki_autorow(Wynik) :- 
     findall(Format, ( 
         bagof(Tytul, (A,B)^ksiazka(A, Tytul, _, B), Ksiazki), 
         znajdz_autora(Ksiazki, Imie), 
         Format = Imie - Ksiazki
     ), Wynik).
-
+% listę par autorów, którzy mogli się spotkać za swojego życia - 
+% podpowiedź: warto zdefiniować osobno predykat sprawdzający, czy dwa okresy czasu nachodzą na siebie
 mogli_sie_spotkac(Wynik) :-
     findall([Autor1, Autor2], (
         ksiazka(_, _, autor(Autor1, P1-K1), _), 
@@ -43,7 +45,8 @@ mogli_sie_spotkac(Wynik) :-
         \+ ( byli(Autor1, Autor2) ; byli(Autor2, Autor1) ),
         assert(byli(Autor1, Autor2))
     ), Wynik).
-
+% imię autora, który żył najdłużej - 
+% podpowiedź: proszę zastosować predykat foldl/4 do znalezienia maksymalnego elementu w liście
 najdluzej_zyjacy_autor(Wynik) :- 
     setof([Imie, Okres], (A,B,C)^ksiazka(A, B, autor(Imie, Okres), C), Lista),
     foldl(wiekszy, Lista, ['', 0], Max), Max = [Wynik,_].
