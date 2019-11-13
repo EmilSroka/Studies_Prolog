@@ -19,7 +19,8 @@ dodaj(Element, List, Result) :- usun(Element, Result, List).
 % Lista jest palindromem, jeżeli czyta się jej elementy od prawej tak samo jak od lewej. 
 % Napisz predykat palindrom/1, który sprawdzi czy lista jest palindromem.
 % Podpowiedzi: proszę użyć predykatu odwracającego listę
-palindrom(List) :- reverse(List, ReversedList), List = ReversedList.
+%%% palindrom(List) :- reverse(List, ReversedList), List = ReversedList.
+palindrom(List) :- reverse(List, List).
 
 % Lista L2 jest podlistą L1 jeżeli znajdują się w niej jedynie elementy L1 (niekoniecznie wszystkie), w tej samej kolejności co w L1. 
 % Proszę napisać predykat podlista/2, który znajduje podlistę dla zadanej listy. 
@@ -40,6 +41,7 @@ odetnij_z_prawej(Length, List, Result) :-
 
 % Napisz predykat zawiera/2, który sprawdza, czy lista L1 zawiera w sobie listę L2, 
 % tj. dla zapytania zawiera([1,2,3,4],[2,3]) zwróci true, ponieważ [2,3] zawiera się w [1,2,3,4].
+/*
 zawiera(_, []).
 zawiera(Set, Subset) :- 
     append(Subset,_,Set), 
@@ -47,7 +49,9 @@ zawiera(Set, Subset) :-
 zawiera([_ | Set], Subset) :- 
     zawiera(Set, Subset), 
     Subset \= [].
-
+*/
+zawiera( _, []).
+zawiera( List, SubList) :- append([_,SubList,_], List), SubList \= [].
 
 % Napisz predykat permutacja/2, który znajduje permutację zadanej listy (permutacja ma te same elementy, ale niekoniecznie w tej samej kolejności), 
 % np. dla zapytania permutacja([d,w,a], X) otrzymamy X równe: [d,a,w], [w,d,a], [w,a,d], [a,d,w], [a,w,d]. 
@@ -59,11 +63,16 @@ permutacja([H | T],Result) :-
 
 % Napisz predykat podziel/3, który dzieli listę na dwie listy o możliwie zbliżonej długości, np.
 % podziel([1],L,P) da L=[1],P=[], podziel([1,2],L,P) da L=[1],P=[2], podziel([1,2,3],L,P) da L=[1,3],P=[2]
+/* 
 podziel(List, L, R) :- 
     append(L, R, List),
     length(L, LLength),
     length(R, RLength),
     ( LLength = RLength ; LLength is RLength + 1 ).
+*/
+podziel([], [], []).
+podziel([H | T], [H | SL], SR) :- length(T, Length), 0 is Length mod 2, podziel(T, SL, SR).
+podziel([H | T], SL, [H | SR]) :- length(T, Length), 1 is Length mod 2, podziel(T, SL, SR).
 
 % Napisz predykat spłaszcz/2, który zamieni listę list w płaską listę:
 % Podpowiedzi: 
