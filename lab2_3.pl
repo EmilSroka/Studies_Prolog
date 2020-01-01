@@ -1,5 +1,5 @@
-% MISJA: zaimplementuj silnię
-% w starym rekurencyjnym stylu. 
+%%% ZADANIE %%%
+% zaimplementuj silnię w starym rekurencyjnym stylu. 
 factorial(0,1).
 factorial(Number, Result) :- Number > 0, 
                              Predecessor is Number - 1, 

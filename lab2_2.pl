@@ -32,8 +32,9 @@ process_command(help) :-
     writeln("- 'help' - wyswietl liste komend"),
     writeln("- 'exit' - zakoncz program").    
 
-% Misja: napisz kod realizujący brakujące komendy!
-
+%%% ZADANIE %%%
+%
+% napisz kod realizujący brakujące komendy!
 process_command(add) :- read(New), assert(jest_znajomym(New)).
 
 process_command(del) :- read(Del), retract(jest_znajomym(Del)).
@@ -41,6 +42,10 @@ process_command(del) :- read(Del), retract(jest_znajomym(Del)).
 process_command(list) :- writeln("Lista znajomych: "), jest_znajomym(Friend),  writeln(Friend), fail.
 process_command(list).
 
-process_command(exit) :- fail.
+process_command(X) :- \+ is_command(X), writeln("Nieznana komenda").
 
-process_command(X) :- X \= exit,  writeln("Nieznana komenda").
+is_command(add).
+is_command(del).
+is_command(list).
+is_command(help).
+is_command(exit).

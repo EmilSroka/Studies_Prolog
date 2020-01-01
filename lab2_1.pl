@@ -1,4 +1,7 @@
-% :- assert(juz_byli(_,_) :- fail).
+%%% ZADANIE %%%
+% Napraw predykat jest_krewnym/2 tak, żeby każda para krewnych pojawiała się w wynikach tylko raz. 
+% Użyj w tym celu niedawno poznanych predykatów assert i retractall.
+
 :- dynamic juz_byli/2.
 
 jest_przodkiem(X,Y) :- jest_rodzicem(X,Y).
@@ -19,7 +22,10 @@ jest_rodzicem(robert,miriam).
 jest_krewnym(X,Y) :- jest_przodkiem(Z,X),
                      jest_przodkiem(Z,Y),
                      X \= Y,
-                     \+ ( juz_byli(X,Y) ; juz_byli(Y,X) ),
+                     nie_byli(X,Y),
                      assert(juz_byli(X,Y)).
                     
 jest_krewnym(_,_) :- retractall( juz_byli(_,_) ).
+
+nie_byli(X,Y) :-  \+ juz_byli(X,Y), 
+                  \+ juz_byli(Y,X).
