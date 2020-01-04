@@ -1,5 +1,7 @@
+%%% WSTĘP %%%
 % Poniżej znajduje się kompletna realizacja zadania z poprzednich zajęć
-% Misja na dzisiaj: poprawić komendę list, by nie używała fail.
+%%% ZADANIE %%%
+% Poprawić komendę list, by nie używała fail.
 
 :- dynamic jest_znajomym/1.
 
@@ -29,9 +31,8 @@ process_command(del) :-
 process_command(list) :-
     writeln('Znajomi:'),
     forall(jest_znajomym(Imie),(
-        format('- ~w', [Imie])
-    )),
-    writeln("").
+        format('- ~w\n', [Imie])
+    )).
 process_command(exit) :- fail.
 process_command(CMD) :-
     \+ known_command(CMD),
