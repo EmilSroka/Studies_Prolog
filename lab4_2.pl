@@ -1,5 +1,11 @@
-% Proszę napisać predykat _is_empty_diff/1, który sprawdzi czy dana lista różnicowa jest pusta.
-is_empty_diff(List-T) :- unify_with_occurs_check(List, T). 
+%%% ZADANIE 1 %%%
+% Proszę napisać predykat is_empty_diff/1, który sprawdzi czy dana lista różnicowa jest pusta.
+is_empty_diff(List-T) :- List == T. 
+
+
+
+
+% TO DO 2, 3
 
 % Proszę napisać predykat length_diff/2, który policzy długość listy różnicowej:
 /*

@@ -49,44 +49,23 @@ odetnij_z_prawej(Length, List, Result) :-
 zawiera(_, []).
 zawiera(List, SubList) :- append([_,SubList,_], List), SubList \= [].
 
-% TO DO: Refactor ex. 8 and 9
+%%% ZADANIE 8 %%%
+% Napisz predykat permutacja/2, który znajduje permutację zadanej listy 
+% (permutacja ma te same elementy, ale niekoniecznie w tej samej kolejności).
+permutacja([],[]).
+permutacja([Head|List], Redsult) :- permutacja(List, Permuted), dodaj(Head, Permuted, Redsult).
 
-% Napisz predykat permutacja/2, który znajduje permutację zadanej listy (permutacja ma te same elementy, ale niekoniecznie w tej samej kolejności), 
-% np. dla zapytania permutacja([d,w,a], X) otrzymamy X równe: [d,a,w], [w,d,a], [w,a,d], [a,d,w], [a,w,d]. 
-% Me: a co z [d, w, a] ?
-%permutacja([],[]).
-%permutacja([H | T],Result) :- 
-%    permutacja(T, SubResult), 
-%    dodaj(H, SubResult, Result).
+%%% ZADANIE 9 %%%
+% Napisz predykat podziel/3, który dzieli listę na dwie listy o możliwie zbliżonej długości.
+%%% ROZWIAZANIE 1 %%%
+podziel([SingleElement], [SingleElement], []).
+podziel([Left,Right], [Left], [Right]).
+podziel([Left,Right|Rest], [Left|LeftPart], [Right|RightPart]) :- podziel(Rest, LeftPart, RightPart).
 
-% Napisz predykat podziel/3, który dzieli listę na dwie listy o możliwie zbliżonej długości, np.
-% podziel([1],L,P) da L=[1],P=[], podziel([1,2],L,P) da L=[1],P=[2], podziel([1,2,3],L,P) da L=[1,3],P=[2]
-/* 
-podziel(List, L, R) :- 
-    append(L, R, List),
-    length(L, LLength),
-    length(R, RLength),
-    ( LLength = RLength ; LLength is RLength + 1 ).
-*/
-/*
-podziel([], [], []).
-podziel([H | T], [H | SL], SR) :- length(T, Length), 0 is Length mod 2, podziel(T, SL, SR).
-podziel([H | T], SL, [H | SR]) :- length(T, Length), 1 is Length mod 2, podziel(T, SL, SR).
-
+%%% ZADANIE 10 %%%
 % Napisz predykat spłaszcz/2, który zamieni listę list w płaską listę:
-% Podpowiedzi: 
-% należy użyć append/3, 
-% ostatni przykład a -> [a] pokazuje jak prosta wersja predykatu radzi sobie z nie-listami
-% to zadanie jest trudne, warto je sobie zostawić na koniec
 splaszcz([], []).
 splaszcz(Element, [Element]) :- \+ is_list(Element).
-splaszcz([H | T], Result) :- 
-    \+ is_list(H), 
-    splaszcz(T, FlattedT), 
-    append([H], FlattedT, Result).
-splaszcz([H | T], Result) :-
-    is_list(H),
-    splaszcz(H, FlattedH),
-    splaszcz(T, FlattedT),
-    append(FlattedH, FlattedT, Result).
-*/
+splaszcz([Head|Tail], Result) :- splaszcz(Head, FlattedHead),
+    splaszcz(Tail, FlattedTail),
+    append(FlattedHead, FlattedTail, Result).
