@@ -8,3 +8,4 @@ Labs thematic scope:
 2. Side effect and arithmetic
 3. List, loop, advanced querie
 4. Difference list, map, filter, reduce
+5. Association list, cut, or
