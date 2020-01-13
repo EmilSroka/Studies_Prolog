@@ -4,8 +4,9 @@ Logical programming course at AGH University of Science and Technology.
 Repo contains my solutions to exercises posted on university internal e-learning system.
 
 Labs thematic scope:
-1. Introduction to Prolog (knowledge base, predicate, querie)
+1. Introduction to Prolog (knowledge base, predicates, queries)
 2. Side effect and arithmetic
-3. List, loop, advanced querie
-4. Difference list, map, filter, reduce
-5. Association list, cut, or
+3. Lists, loops, advanced queries
+4. Difference lists, map, filter, reduce
+5. Association lists, cut, or
+6. Operators, currying
